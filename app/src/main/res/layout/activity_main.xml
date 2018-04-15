@@ -11,9 +11,8 @@
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/send_message_layout"
-        android:divider="@null" />
+        android:layout_height="wrap_content"
+        android:fastScrollEnabled="true"></ListView>
     <!--To type and send the message-->
     <LinearLayout
         android:id="@+id/send_message_layout"

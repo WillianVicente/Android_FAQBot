@@ -2,15 +2,25 @@ package com.chatapp.chatapp;
 
 public class Message {
 
-    public String actor;
-    public String message;
+    private String time;
+    private String actor;
+    private String message;
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     public Message(){
     }
 
-    public Message(String actor , String message){
+    public Message(String actor , String message, String time){
         this.actor = actor;
         this.message = message;
+        this.time = time;
     }
 
     public String getActor(){

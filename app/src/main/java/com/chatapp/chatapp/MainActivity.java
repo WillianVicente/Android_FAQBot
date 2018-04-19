@@ -6,38 +6,43 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.chatapp.chatapp.util.TimeNow;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private EditText messageEditText;
     private ListView listView;
-    private List<Message> list;
+    private ArrayList<Message> listMessages = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         messageEditText = findViewById(R.id.messageEditText);
-        ListView listView = (ListView) findViewById(R.id.listView);
+        listView = findViewById(R.id.listView);
     }
 
     public void CaptureMessageSend(View view) {
-        String message = messageEditText.getText().toString();
-        Message msg = new Message("cliente", message);
-        setMessageBox(msg);
+       Message msg = new Message("Usuario", messageEditText.getText().toString(), TimeNow.TimeIsNow());
+
+       setMessageBox(msg);
+       messageEditText.setText("");
+
+        Message msg2 = new Message("Bot", "eae", TimeNow.TimeIsNow());
+        setMessageBox(msg2);
+
+
     }
 
     public void setMessageBox(Message msg){
-        ArrayList<Message> lista = new ArrayList<>();
-        lista.add(msg);
+        listMessages.add(msg);
 
-        list = lista;
-
-        MessageAdapter <Message> adapter =
-                new MessageAdapter<>(this, list);
+        MessageListAdapter<Message> adapter =
+                 new MessageListAdapter<>(this, listMessages);
 
         listView.setAdapter(adapter);
+
     }
 }

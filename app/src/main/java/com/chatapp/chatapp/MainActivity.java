@@ -28,11 +28,10 @@ import static com.chatapp.chatapp.util.Util.TimeIsNow;
 
 public class MainActivity extends FragmentActivity {
 
-    private EditText messageEditText;
     private ListView listView;
+    private EditText messageEditText;
     private ArrayList<Message> listMessages = new ArrayList<>();
     private static String id;
-    private Button btn_send;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,6 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
         messageEditText = findViewById(R.id.messageEditText);
         listView = findViewById(R.id.listView);
-        btn_send = findViewById(R.id.btn_send);
 
         IdDAO dao = new IdDAO(this);
         //Buscar o Id do usuario
@@ -49,6 +47,9 @@ public class MainActivity extends FragmentActivity {
             id = Util.RandomGuid();
             dao.InserirId(id);
         }
+
+
+
     }
 
     public void CaptureMessageSend(View view) {

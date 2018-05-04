@@ -9,6 +9,7 @@
 
     <ImageView
         android:id="@+id/image_message_profile"
+        android:src="@drawable/faqbot"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:background="@drawable/circle"

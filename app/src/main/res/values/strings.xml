@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ChatApp</string>
+    <string name="app_name">FAQ Bot</string>
     <string name="enviar">Enviar</string>
     <string name="botname">Bot FAQ</string>
     <string name="descriptionEditText">Digite sua mensagem aqui...</string>

@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -21,8 +22,10 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static com.chatapp.chatapp.util.Util.TimeIsNow;
@@ -30,11 +33,13 @@ import static com.chatapp.chatapp.util.Util.TimeIsNow;
 
 public class MainActivity extends FragmentActivity {
 
-
+    private String[] message;
     private ListView listView;
     private EditText messageEditText;
     private ArrayList<Message> listMessages = new ArrayList<>();
     private static String id;
+    public static final MediaType JSON
+            = MediaType.parse("application/json; charset=utf-8");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +59,12 @@ public class MainActivity extends FragmentActivity {
         Message msg = new Message("Usuario", messageEditText.getText().toString(), Util.TimeIsNow());
         setMessageBox(msg);
         messageEditText.setText("");
-        new ConsomeWS().execute("http://10.0.2.2:8080/FAQBot/api/sendmessage/"+ id + "&" + Util.RemoverAcentos(msg.getMessage()));
+
+
+        message = new String[2];
+        message[0] = "http://10.0.2.2:8080/FAQBot/api/message";
+        message[1] = "{id:" + id + ", message:" + Util.RemoverAcentos(msg.getMessage()) + "}";
+        new ConsomeWS().execute(message);
     }
 
     public void setMessageBox(Message msg){
@@ -68,11 +78,14 @@ public class MainActivity extends FragmentActivity {
 
     private class ConsomeWS extends AsyncTask<String, Void, String> {
         @Override
-        protected String doInBackground(String... strings) {
+        protected String doInBackground(String... json) {
             OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder()
-                    .url(strings[0])
-                    .build();
+
+                RequestBody body = RequestBody.create(JSON, json[1]);
+                Request request = new Request.Builder()
+                        .url(json[0])
+                        .post(body)
+                        .build();
             try{
                 Response response = client.newCall(request).execute();
                 return response.body().string();

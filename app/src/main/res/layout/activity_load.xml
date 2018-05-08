@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_root"
+    style="@style/MatchParent"
+    tools:ignore="ContentDescription"
+    android:background="#000">
+
+    <LinearLayout
+        android:id="@+id/linearlayout1"
+        style="@style/WrapContent"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_above="@id/linearlayout2">
+        <TextView
+            android:id="@+id/text_splash_app_title"
+            style="@style/SplashAppTitleStyle"
+            android:text="@string/app_name" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearlayout2"
+        style="@style/WrapContent"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+    <ImageView
+        android:id="@+id/image"
+        style="@style/SplashLogoStyle"
+        android:layout_marginBottom="40dp"/></LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearlayout3"
+        style="@style/WrapContent"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="30dp">
+        <TextView
+            android:id="@+id/text_splash_app_version"
+            style="@style/SplashAppVersionStyle"
+            android:layout_marginTop="20dp"
+            android:text="@string/app_version" />
+    </LinearLayout>
+</RelativeLayout>

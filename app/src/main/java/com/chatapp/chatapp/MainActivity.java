@@ -1,5 +1,7 @@
 package com.chatapp.chatapp;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +30,7 @@ import static com.chatapp.chatapp.util.Util.TimeIsNow;
 
 public class MainActivity extends FragmentActivity {
 
+
     private ListView listView;
     private EditText messageEditText;
     private ArrayList<Message> listMessages = new ArrayList<>();
@@ -37,20 +40,15 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Intent origemIntent = getIntent();
+        id = origemIntent.getStringExtra(LoadActivity.CHAVE);
+
         messageEditText = findViewById(R.id.messageEditText);
         listView = findViewById(R.id.listView);
-
-        IdDAO dao = new IdDAO(this);
-        //Buscar o Id do usuario
-        id = dao.recuperarId();
-        if(id.isEmpty()){
-            id = Util.RandomGuid();
-            dao.InserirId(id);
-        }
-
-
-
     }
+
+
 
     public void CaptureMessageSend(View view) {
         Message msg = new Message("Usuario", messageEditText.getText().toString(), Util.TimeIsNow());
@@ -80,8 +78,7 @@ public class MainActivity extends FragmentActivity {
                 return response.body().string();
             }
             catch(IOException e){
-                e.printStackTrace();
-                return null;
+                return "";
             }
         }
 
@@ -104,7 +101,11 @@ public class MainActivity extends FragmentActivity {
                     }
                 }
             } catch (JSONException e) {
+                Message msg = new Message("Bot", "O serviço está fora do ar no momento. Tente novamente mais tarde.", TimeIsNow());
+                setMessageBox(msg);
                 e.printStackTrace();
+            } catch(Exception f){
+                f.printStackTrace();
             }
         }
     }

@@ -7,51 +7,19 @@
     android:orientation="vertical"
     tools:context="com.chatapp.chatapp.MainActivity">
 
-    <LinearLayout
+    <fragment
+        android:id="@+id/mensagem_fragment"
+        class="com.chatapp.chatapp.MessageFragment"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_above="@id/send_message_layout">
+        android:layout_above="@id/button_fragment"
+        tools:layout="@layout/fragment_message" />
 
-        <ListView
-            android:id="@+id/listView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:fastScrollEnabled="false"
-            android:stackFromBottom="true"
-            android:transcriptMode="alwaysScroll"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true">
-
-
-
-
-        </ListView>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/send_message_layout"
+    <fragment
+        android:id="@+id/button_fragment"
+        class="com.chatapp.chatapp.ButtonFragment"
+        tools:layout="@layout/fragment_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#ffffff"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/messageEditText"
-            android:hint="@string/descriptionEditText"
-            android:layout_width="0dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/btn_send"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_send_24dp"
-            android:text="@string/enviar"
-            android:onClick="CaptureMessageSend"/>
-    </LinearLayout>
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>

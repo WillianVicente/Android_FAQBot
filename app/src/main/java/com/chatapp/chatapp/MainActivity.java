@@ -62,7 +62,7 @@ public class MainActivity extends FragmentActivity {
 
 
         message = new String[2];
-        message[0] = "http://10.0.2.2:8080/FAQBot/api/message";
+        message[0] = "http://10.0.2.2:8080/FAQBotAPI/api/message";
         message[1] = "{id:" + id + ", message:" + Util.RemoverAcentos(msg.getMessage()) + "}";
         new ConsomeWS().execute(message);
     }

@@ -1,12 +1,11 @@
-package com.chatapp.chatapp;
+package com.chatapp.chatapp.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.chatapp.chatapp.dao.DBHelper;
 
 public class IdDAO {
 

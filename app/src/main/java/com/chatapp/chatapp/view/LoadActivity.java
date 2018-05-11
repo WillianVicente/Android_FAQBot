@@ -1,10 +1,12 @@
-package com.chatapp.chatapp;
+package com.chatapp.chatapp.view;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 
+import com.chatapp.chatapp.R;
+import com.chatapp.chatapp.dao.IdDAO;
 import com.chatapp.chatapp.util.Util;
 
 public class LoadActivity extends FragmentActivity {

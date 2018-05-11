@@ -5,11 +5,11 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context="com.chatapp.chatapp.MainActivity">
+    tools:context="com.chatapp.chatapp.view.MainActivity">
 
     <fragment
         android:id="@+id/mensagem_fragment"
-        class="com.chatapp.chatapp.MessageFragment"
+        class="com.chatapp.chatapp.view.MessageFragment"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_above="@id/button_fragment"
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/button_fragment"
-        class="com.chatapp.chatapp.ButtonFragment"
+        class="com.chatapp.chatapp.view.ButtonFragment"
         tools:layout="@layout/fragment_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

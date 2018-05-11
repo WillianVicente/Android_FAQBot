@@ -1,4 +1,4 @@
-package com.chatapp.chatapp;
+package com.chatapp.chatapp.model;
 
 public class Message {
 

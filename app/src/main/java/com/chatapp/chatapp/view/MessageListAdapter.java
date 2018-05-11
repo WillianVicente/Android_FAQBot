@@ -1,4 +1,4 @@
-package com.chatapp.chatapp;
+package com.chatapp.chatapp.view;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -7,9 +7,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.HashMap;
+import com.chatapp.chatapp.model.Message;
+import com.chatapp.chatapp.R;
+
 import java.util.List;
-import java.util.Map;
 
 public class MessageListAdapter<T> extends BaseAdapter {
 

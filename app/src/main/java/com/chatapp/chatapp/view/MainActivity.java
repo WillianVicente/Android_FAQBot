@@ -1,18 +1,15 @@
-package com.chatapp.chatapp;
+package com.chatapp.chatapp.view;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.chatapp.chatapp.model.Message;
+import com.chatapp.chatapp.R;
 import com.chatapp.chatapp.util.Util;
 
 import org.json.JSONArray;
@@ -53,18 +50,33 @@ public class MainActivity extends FragmentActivity {
         listView = findViewById(R.id.listView);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
 
+        //opcional
+        RecepcaoBemVindo();
+    }
+
+    public void RecepcaoBemVindo(){
+        message = new String[2];
+        message[0] = "http://10.0.2.2:8080/FAQBotAPI/api/message";
+        message[1] = "{id:" + "\"" +id + "\"" + ", message:" + "\"[BemVindo]\"" + "}";
+        new ConsomeWS().execute(message);
+    }
 
     public void CaptureMessageSend(View view) {
         Message msg = new Message("Usuario", messageEditText.getText().toString(), Util.TimeIsNow());
-        setMessageBox(msg);
+
+        if(!msg.getMessage().replace(" ", "").equals("") && !msg.getMessage().replace("\n", "").equals("")){
+            setMessageBox(msg);
+
+            message = new String[2];
+            message[0] = "http://10.0.2.2:8080/FAQBotAPI/api/message";
+            message[1] = "{id:" + "\"" +id + "\"" + ", message:" + "\"" + Util.RemoverAcentos(msg.getMessage()) + "\"" + "}";
+            new ConsomeWS().execute(message);
+        }
         messageEditText.setText("");
-
-
-        message = new String[2];
-        message[0] = "http://10.0.2.2:8080/FAQBotAPI/api/message";
-        message[1] = "{id:" + id + ", message:" + Util.RemoverAcentos(msg.getMessage()) + "}";
-        new ConsomeWS().execute(message);
     }
 
     public void setMessageBox(Message msg){

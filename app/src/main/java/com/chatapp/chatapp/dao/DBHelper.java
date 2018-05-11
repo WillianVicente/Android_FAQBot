@@ -1,4 +1,4 @@
-package com.chatapp.chatapp;
+package com.chatapp.chatapp.dao;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

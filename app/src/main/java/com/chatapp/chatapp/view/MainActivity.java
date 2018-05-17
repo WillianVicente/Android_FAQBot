@@ -70,6 +70,7 @@ public class MainActivity extends FragmentActivity {
 
         if(!msg.getMessage().replace(" ", "").equals("") && !msg.getMessage().replace("\n", "").equals("")){
             setMessageBox(msg);
+            msg.setMessage(msg.getMessage().replace("\n", " "));
 
             message = new String[2];
             message[0] = "http://10.0.2.2:8080/FAQBotAPI/api/message";

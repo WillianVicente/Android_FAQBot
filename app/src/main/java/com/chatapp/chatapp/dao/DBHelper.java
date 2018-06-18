@@ -4,12 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-/**
- * Willian Vicente Prado
- * RA: 816119009
- * ADSMCA3
- */
-
 public class DBHelper extends SQLiteOpenHelper {
 
     private Context context;

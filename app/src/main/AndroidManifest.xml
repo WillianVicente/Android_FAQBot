@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".view.LoadActivity"
+        <activity android:name=".view.LoadingActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                     <action android:name="android.intent.action.MAIN" />

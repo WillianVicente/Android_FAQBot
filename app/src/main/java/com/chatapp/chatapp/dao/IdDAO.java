@@ -10,6 +10,7 @@ import com.chatapp.chatapp.dao.DBHelper;
 public class IdDAO {
 
     private Context context;
+
     public IdDAO (Context context){
         this.context = context;
     }
@@ -23,7 +24,8 @@ public class IdDAO {
         db.close();
     }
 
-    public String recuperarId(){
+
+    public String RecuperarId(){
         String id = "";
         try {
             DBHelper helper = new DBHelper(context);

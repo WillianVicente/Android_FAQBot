@@ -27,24 +27,28 @@ import okhttp3.Response;
 
 import static com.chatapp.chatapp.util.Util.TimeIsNow;
 
-
+//Tela do chat de mensagens
 public class MainActivity extends FragmentActivity {
 
-    private String[] message;
+    private static String idUsuario;
+
     private ListView listView;
     private EditText messageEditText;
+
+    private String[] message;
     private ArrayList<Message> listMessages = new ArrayList<>();
-    private static String id;
+
     public static final MediaType JSON
             = MediaType.parse("application/json; charset=utf-8");
 
+    //Cria a tela de mensagens e recupera o ID do usuario da sobre a Intent.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Intent origemIntent = getIntent();
-        id = origemIntent.getStringExtra(LoadActivity.CHAVE);
+        idUsuario = origemIntent.getStringExtra(LoadingActivity.CHAVE);
 
         messageEditText = findViewById(R.id.messageEditText);
         listView = findViewById(R.id.listView);
@@ -53,18 +57,21 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         //opcional
-        RecepcaoBemVindo();
+        RecepcaoMensagem();
     }
 
-    public void RecepcaoBemVindo(){
+    //Manda uma mensagem para a API com a intenção [BemVindo]
+    //API retorna uma mensagem de boas vindas com o nome do usuario, caso não tenha cadastrado a API solicita um nome para cadastrar.
+    public void RecepcaoMensagem(){
         message = new String[2];
-        message[0] = "http://10.0.2.2:8080/FAQBotAPI/api/message";
-        message[1] = "{id:" + "\"" +id + "\"" + ", message:" + "\"[BemVindo]\"" + "}";
+        //message[0] = "http://10.0.2.2:8080/FAQBotAPI/api/message";
+        message[0] = "http://10.0.3.2:8080/FAQBotAPI/api/message";
+        message[1] = "{id:" + "\"" + idUsuario + "\"" + ", message:" + "\"[BemVindo]\"" + "}";
         new ConsomeWS().execute(message);
     }
 
+    //Recebe a mensagem que o usuario digitou na tela e envia para a API
     public void CaptureMessageSend(View view) {
         Message msg = new Message("Usuario", messageEditText.getText().toString(), Util.TimeIsNow());
 
@@ -73,13 +80,15 @@ public class MainActivity extends FragmentActivity {
             msg.setMessage(msg.getMessage().replace("\n", " "));
 
             message = new String[2];
-            message[0] = "http://10.0.2.2:8080/FAQBotAPI/api/message";
-            message[1] = "{id:" + "\"" +id + "\"" + ", message:" + "\"" + Util.RemoverAcentos(msg.getMessage()) + "\"" + "}";
+            //message[0] = "http://10.0.2.2:8080/FAQBotAPI/api/message";
+            message[0] = "http://10.0.3.2:8080/FAQBotAPI/api/message";
+            message[1] = "{id:" + "\"" + idUsuario + "\"" + ", message:" + "\"" + Util.RemoverAcentos(msg.getMessage()) + "\"" + "}";
             new ConsomeWS().execute(message);
         }
         messageEditText.setText("");
     }
 
+    //Imprime na tela a mensagem do usuario ou do bot
     public void setMessageBox(Message msg){
         listMessages.add(msg);
 
@@ -89,6 +98,7 @@ public class MainActivity extends FragmentActivity {
         listView.setAdapter(adapter);
     }
 
+    //Metodo que envia a mensagem do usuario via HTTP para a API e retorna a resposta
     private class ConsomeWS extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... json) {

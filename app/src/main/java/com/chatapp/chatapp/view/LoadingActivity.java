@@ -9,14 +9,14 @@ import com.chatapp.chatapp.R;
 import com.chatapp.chatapp.dao.IdDAO;
 import com.chatapp.chatapp.util.Util;
 
-public class LoadActivity extends FragmentActivity {
+//Tela onde acontece a splash screen (Tela de inicilização onde aparece a imagem do FAQBOT)
+public class LoadingActivity extends FragmentActivity {
     public final static String CHAVE = "LOGINID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_load);
-
 
         Handler handle = new Handler();
         handle.postDelayed(new Runnable() {
@@ -25,20 +25,22 @@ public class LoadActivity extends FragmentActivity {
                 loginToSQLite();
             }
         }, 2000);
-
-
     }
 
+    //Recupera o Id do usuario, caso não exista ID cria um.
     private void loginToSQLite(){
         IdDAO dao = new IdDAO(this);
         String id = "";
 
-        id = dao.recuperarId();
+        //Comando para recuperar o ID
+        id = dao.RecuperarId();
         if(id.isEmpty()){
+            //Comando para criar o ID
             id = Util.RandomGuid();
             dao.InserirId(id);
         }
 
+        //Chama a tela onde envia as mensagens passando o ID do usuario como parametro (Tela MainActivity)
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra(CHAVE, id);
         startActivity(intent);
